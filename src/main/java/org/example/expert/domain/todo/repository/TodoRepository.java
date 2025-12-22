@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public interface TodoRepository extends JpaRepository<Todo, Long> {
+public interface TodoRepository extends JpaRepository<Todo, Long>, TodoCustomRepository {
 
     @Query("""
     SELECT t
@@ -20,10 +20,6 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
       AND (:from IS NULL OR t.modifiedAt >= :from)
       AND (:to IS NULL OR t.modifiedAt <= :to)
 """)
-    Page<Todo> searchTodos( @Param("weather") String weather, @Param("from") LocalDateTime from, @Param("to") LocalDateTime to, Pageable pageable);
+    Page<Todo> searchTodos(@Param("weather") String weather, @Param("from") LocalDateTime from, @Param("to") LocalDateTime to, Pageable pageable);
 
-    @Query("SELECT t FROM Todo t " +
-            "LEFT JOIN t.user " +
-            "WHERE t.id = :todoId")
-    Optional<Todo> findByIdWithUser(@Param("todoId") Long todoId);
 }
