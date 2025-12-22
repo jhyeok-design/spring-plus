@@ -81,4 +81,8 @@ public class JwtFilter extends OncePerRequestFilter {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        return request.getRequestURI().startsWith("/auth");
+    }
 }
