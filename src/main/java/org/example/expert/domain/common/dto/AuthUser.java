@@ -2,6 +2,7 @@ package org.example.expert.domain.common.dto;
 
 import lombok.Getter;
 import org.example.expert.domain.user.enums.UserRole;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 public class AuthUser {
