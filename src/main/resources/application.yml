@@ -1,18 +1,20 @@
 spring:
+  application:
+    name: Outsourcing
+  config:
+    import: optional:file:.properties[.properties]
   datasource:
-    url: jdbc:mysql://localhost:3306/nbcam
-    username: root
-    password: 12345678
     driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
-    show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
-        format_sql: true
-    defer-datasource-initialization: true
-
-jwt:
-  secret:
-    key: e2nit3sab2r1obl4emIfthelengthistooshortthesecurityisnotsufficientsoanerroroccurs
+        format_sql: false
+    show-sql: true
+  cache:
+    caffeine:
+      spec: maximumSize=100,expireAfterWrite=60s
